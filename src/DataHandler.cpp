@@ -3,11 +3,11 @@
 #include <sstream>
 #include "DataHandler.h"
 #include "Graph.h"
-#include "0_Settings.h"
+#include "Settings.h"
 
 Graph DataHandler::create_graph() {
     std::ifstream file;
-    file.open(vertices_path);
+    file.open(synthesized_instance_path);
 
     std::string l;
     std::getline(file, l);

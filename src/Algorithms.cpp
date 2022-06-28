@@ -1,7 +1,7 @@
 #include "Algorithms.h"
 
-//input: complete graph, calculated cost per cubic_costs of this graph
-//output: graph with predecided edges (0:cut, 1:join)
+//input: complete graph, calculated cost per triple_costs of this graph
+//output: graph with contraints (0:cut, 1:join)
 void Algorithms::evaluate_edge_criterion(){
     for v_dim1 in graph.vertices:
         for v_dim2 in graph.vertices:

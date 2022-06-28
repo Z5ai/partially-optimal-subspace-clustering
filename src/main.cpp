@@ -2,26 +2,25 @@
 #include <vector>
 #include "DataHandler.h"
 #include "Algorithms.h"
-#include "0_Settings.h"
+#include "Settings.h"
 
 int main() {
     // read data
     // TODO: concrete structure of graph: lookup details in Julius code
-    // TODO: concrete structure of cubic_costs: 3-dimensional array, lookup details in Julius code
-
+    // TODO: concrete structure of triple_costs: 3-dimensional array, lookup details Julius code
     DataHandler data_handler{};
     Graph graph = data_handler.create_graph();
-    auto cubic_costs = data_handler.create_cubic_costs();
+    auto triple_costs = data_handler.create_triple_costs();
 
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};
     switch(criterion){
-        case edge: predecided_edges = algorithms.evaluate_edge_criterion(graph, cubic_costs);
-        case triangle: predecided_edges = algorithms.evaluate_triangle_criterion(graph, cubic_costs);
+        case edge: constraints = algorithms.evaluate_edge_criterion(graph, triple_costs);
+        case triangle: constraints = algorithms.evaluate_triangle_criterion(graph, triple_costs);
     }
 
     // write data
-    // TODO: data format for predecided edges
-    data_handler.write_predecided_edges(predecided_edges);
+    // TODO: data format for contraints
+    data_handler.write_constraints(constraints);
     return 0;
 }
