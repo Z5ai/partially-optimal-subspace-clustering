@@ -4,21 +4,21 @@
 
 #include <iostream>
 #include <fstream>
-#include <array>
-#include <vector>
 #include <sstream>
 #include "DataHandler.h"
+#include "Graph.h"
 
 
 
 
-std::vector<DataHandler::vertex> DataHandler::parse() {
+
+Graph DataHandler::create_graph() {
     std::ifstream file;
     file.open(data_dir + "vertices.csv");
 
     std::string l;
     std::getline(file, l);
-    std::vector<vertex> vertices;
+    Graph graph{};
     while (std::getline(file, l))
     {
         std::istringstream iss(l);
@@ -26,9 +26,12 @@ std::vector<DataHandler::vertex> DataHandler::parse() {
         char c;
         if (!(iss >> x >> c >> y >> c >> z) && c == ',') { break; }
         vertex v{x,y,z};
-        vertices.push_back(v);
+        graph.insert_vertex(v);
     }
 
     file.close();
-    return vertices;
+    return graph;
 }
+
+
+

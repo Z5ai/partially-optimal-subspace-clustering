@@ -6,14 +6,14 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_DATAHANDLER_H
 
 
-
+#include "Graph.h"
 
 class DataHandler {
-    typedef std::array<float,3> vertex;
     std::string data_dir{"/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering/data/"};
 
 public:
-    std::vector<vertex> parse();
+
+    Graph create_graph();
 };
 
 
