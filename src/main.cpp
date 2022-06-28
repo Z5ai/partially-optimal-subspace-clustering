@@ -2,6 +2,7 @@
 #include <vector>
 #include "DataHandler.h"
 #include "Algorithms.h"
+#include "0_Settings.h"
 
 int main() {
     // read data
@@ -13,10 +14,13 @@ int main() {
 
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};
-    predecided_edges = algorithms.evaluate_edge_criterion(graph, costtriangles);
+    switch(criterion){
+        case edge: predecided_edges = algorithms.evaluate_edge_criterion(graph, costtriangles);
+        case triangle: predecided_edges = algorithms.evaluate_triangle_criterion(graph, costtriangles);
+    }
 
     // write data
     // TODO: data format for predecided edges
-    data_handler.write_predecided_edges();
+    data_handler.write_predecided_edges(predecided_edges);
     return 0;
 }

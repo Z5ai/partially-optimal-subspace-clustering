@@ -9,7 +9,7 @@
 #include "Graph.h"
 
 class DataHandler {
-    std::string data_dir{"/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering/data/"};
+
 
 public:
 

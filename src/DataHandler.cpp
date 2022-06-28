@@ -7,6 +7,7 @@
 #include <sstream>
 #include "DataHandler.h"
 #include "Graph.h"
+#include "0_Settings.h"
 
 
 
@@ -14,7 +15,7 @@
 
 Graph DataHandler::create_graph() {
     std::ifstream file;
-    file.open(data_dir + "vertices.csv");
+    file.open(vertices_path);
 
     std::string l;
     std::getline(file, l);
