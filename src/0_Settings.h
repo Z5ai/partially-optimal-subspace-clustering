@@ -1,10 +1,13 @@
-// A
+// A: Organisational Stuff
 //TODO A1: ask Julius:
-// general:
+// now:
 // - git clone https://github.com/Z5ai/subspace-clustering.git --recurse-submodules
 // - define settings in go and c++ settingfiles
 // - run go-code with: go run ./main.go
 //   run c++-code with: g++ -o program *.cpp && ./program && rm program
+// possible improvement:
+// - run code with one command:
+//   go run ./{local_search_dir}/main_synthesize_data.go     &&    cd {partial_optimality_dir} g++ -o program *.cpp && ./program && rm program && cd ..     &&    go run ./{local_search_dir}/main_local_search.go
 
 //TODO A2: ask Julius: settings like partially-optimal-subspace-clustering/src/0_Settings.h:
 // - switch for 'synthesizing graph and creating 0_cubic_costs and creating 0_vertices' vs 'local search based on 1_predecided_edges'
@@ -17,11 +20,11 @@
 //TODO A4: ask Julius: location for 0_cubic_costs.csv and 0_vertices
 
 
-// B
+// B: Data Structures and Formats
 //TODO: ask Julius:
 // - data structure for graph (used in program, just use vertices?)
-// - data structure for cubic_costs (1_predecided_edges   and   used in program)
-// - data structure for predecided_edges
+// - data structure for cubic_costs (1_predecided_edges   and   used in program)          map: 3 vertices -> float
+// - data structure for predecided_edges                                                  map: 2 vertices -> float
 
 
 
