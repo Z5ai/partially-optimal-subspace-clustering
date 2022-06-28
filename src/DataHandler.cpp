@@ -1,17 +1,9 @@
-//
-// Created by david on 24.06.22.
-//
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include "DataHandler.h"
 #include "Graph.h"
 #include "0_Settings.h"
-
-
-
-
 
 Graph DataHandler::create_graph() {
     std::ifstream file;
@@ -33,6 +25,3 @@ Graph DataHandler::create_graph() {
     file.close();
     return graph;
 }
-
-
-

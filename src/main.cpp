@@ -7,16 +7,17 @@
 int main() {
     // read data
     // TODO: concrete structure of graph: lookup details in Julius code
-    // TODO: concrete structure of costtriangles: 3-dimensional array, lookup details in Julius code
+    // TODO: concrete structure of cubic_costs: 3-dimensional array, lookup details in Julius code
+
     DataHandler data_handler{};
     Graph graph = data_handler.create_graph();
-    auto costtriangles = data_handler.create_costtriangles();
+    auto cubic_costs = data_handler.create_cubic_costs();
 
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};
     switch(criterion){
-        case edge: predecided_edges = algorithms.evaluate_edge_criterion(graph, costtriangles);
-        case triangle: predecided_edges = algorithms.evaluate_triangle_criterion(graph, costtriangles);
+        case edge: predecided_edges = algorithms.evaluate_edge_criterion(graph, cubic_costs);
+        case triangle: predecided_edges = algorithms.evaluate_triangle_criterion(graph, cubic_costs);
     }
 
     // write data
