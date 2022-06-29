@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include "DataHandler.h"
 #include "Algorithms.h"
-#include "Settings.h"
+#include "Constants.h"
 
 int main() {
     // read data
@@ -14,13 +15,24 @@ int main() {
 
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};
-    switch(criterion){
-        case edge: constraints = algorithms.evaluate_edge_criterion(graph, triple_costs);
-        case triangle: constraints = algorithms.evaluate_triangle_criterion(graph, triple_costs);
+    std::vector<edge> cuts{};
+    std::vector<edge> joins{};
+    std::vector<edge> result{};
+    if(edge_criterion_cut==true){
+        result = algorithms.evaluate_edge_criterion_cut(graph, triple_costs);
+        cuts.insert(cuts.end(), result.begin(), result.end());
+    }
+    if(edge_criterion_join==true){
+        result = algorithms.evaluate_edge_criterion_join(graph, triple_costs);
+        joins.insert(joins.end(), result.begin(), result.end());
+    }
+    if(triangle_criterion==true){
+        result = algorithms.evaluate_triangle_criterion(graph, triple_costs);
+        joins.insert(joins.end(), result.begin(), result.end());
     }
 
     // write data
-    // TODO: data format for contraints
-    data_handler.write_constraints(constraints);
+    // map -> json
+    data_handler.write_constraints(cuts, joins);
     return 0;
 }

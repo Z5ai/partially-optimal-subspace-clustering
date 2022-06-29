@@ -3,7 +3,7 @@
 #include <sstream>
 #include "DataHandler.h"
 #include "Graph.h"
-#include "Settings.h"
+#include "Constants.h"
 
 Graph DataHandler::create_graph() {
     std::ifstream file;
@@ -24,4 +24,13 @@ Graph DataHandler::create_graph() {
 
     file.close();
     return graph;
+}
+
+void DataHandler::write_constraints(std::vector<edge> cuts, std::vector<edge> joins){
+    for(edge cut: cuts){
+
+    }
+    for(edge join: joins){
+
+    }
 }
