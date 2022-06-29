@@ -1,12 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <json/json.h>
 #include "DataHandler.h"
 #include "Algorithms.h"
 #include "Constants.h"
 
 int main() {
     // read data
+    // TODO  function InitializeTripleCosts from GreedyMoving class to generate triplecostarray
+    //       function GetTripleCost from GreedyMoving class to access triplecostarray
     // TODO: concrete structure of graph: lookup details in Julius code
     // TODO: concrete structure of triple_costs: 3-dimensional array, lookup details Julius code
     DataHandler data_handler{};
