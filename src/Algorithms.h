@@ -1,28 +1,21 @@
 #ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_ALGORITHMS_H
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_ALGORITHMS_H
 
-
-#include "Graph.h"
 #include "Constants.h"
 
 class Algorithms {
 
 public:
-    void evaluate_triangle_criterion();
 
-    void evaluate_edge_criterion_join();
 
-    void evaluate_edge_criterion_cut();
+    std::vector<edge_type>
+    evaluate_edge_criterion_cut(std::vector<vertex_type> vertices, triple_costs_type triple_cost);
 
-    void evaluate_edge_criterion_cut(Graph graph, auto triple_cost, auto constraints);
+    std::vector<edge_type>
+    evaluate_edge_criterion_join(std::vector<vertex_type> vertices, triple_costs_type triple_cost);
 
-    std::vector<edge> evaluate_edge_criterion_cut(Graph graph, auto triple_cost, auto constraints);
-
-    std::vector<edge> evaluate_edge_criterion_cut(Graph graph, auto triple_cost);
-
-    std::vector<edge> evaluate_edge_criterion_join(Graph graph, auto triple_cost);
-
-    std::vector<edge> evaluate_triangle_criterion(Graph graph, auto triple_cost);
+    std::vector<edge_type>
+    evaluate_triangle_criterion(std::vector<vertex_type> vertices, triple_costs_type triple_cost);
 };
 
 

@@ -1,36 +1,55 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 #include "DataHandler.h"
-#include "Graph.h"
 #include "Constants.h"
 
-Graph DataHandler::create_graph() {
+std::vector<vertex_type> DataHandler::create_vertices() {
     std::ifstream file;
     file.open(synthesized_instance_path);
-
     std::string l;
     std::getline(file, l);
-    Graph graph{};
+    std::vector<vertex_type> vertices;
     while (std::getline(file, l))
     {
         std::istringstream iss(l);
         float x, y, z;
         char c;
         if (!(iss >> x >> c >> y >> c >> z) && c == ',') { break; }
-        vertex v{x,y,z};
-        graph.insert_vertex(v);
+        vertex_type v{x, y, z};
+        vertices.push_back(v);
     }
-
     file.close();
-    return graph;
+    return vertices;
 }
 
-void DataHandler::write_constraints(std::vector<edge> cuts, std::vector<edge> joins){
-    for(edge cut: cuts){
+triple_costs_type DataHandler::create_triple_costs(int v){
+
+    std::vector<std::vector<std::vector<float>>> dim_o;
+    for(int o{0}; o < v; o++){
+
+        std::vector<std::vector<float>> dim_m;
+        for(int m{o+1}; m < v; m++){
+
+            std::vector<float> dim_i;
+            for(int i{m+1}; i < v; i++){
+                float cost;
+                //cost = json;
+                dim_i.push_back(cost);
+            }
+            dim_m.push_back(dim_i);
+        }
+        dim_o.push_back(dim_m);
+    }
+    return dim_o;
+}
+
+void DataHandler::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){
+    for(edge_type cut: cuts){
 
     }
-    for(edge join: joins){
+    for(edge_type join: joins){
 
     }
 }
