@@ -27,10 +27,10 @@ std::vector<vertex_type> DataHandler::create_vertices() {
 }
 
 triple_costs_type DataHandler::create_triple_costs(int n){
-
     std::ifstream ifs {triple_costs_path};
     if ( !ifs.is_open() )
     {
+
         std::cerr << "Could not open file for reading!\n";
         throw std::exception();
     }
@@ -56,6 +56,8 @@ triple_costs_type DataHandler::create_triple_costs(int n){
     }
     return first_dim;
 }
+
+// TODO: write function to sort vertices and access costtriples
 
 
 void DataHandler::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){

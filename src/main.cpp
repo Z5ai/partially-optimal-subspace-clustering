@@ -5,12 +5,10 @@
 
 
 int main() {
+    // TODO: restructuring: put local-search-algorithm project into dependencies folder. make partial-optimal subspace-clustering to main project. call go script here in main function.
+
     // read data
-    // TODO: concrete structure of triple_costs: 3-dimensional array, lookup details Julius code
-    //  function InitializeTripleCosts from GreedyMoving class, line 348 to generate triplecostarray
     //  function GetTripleCost from GreedyMoving class, line 45 to access triplecostarray
-    // std::array 1.000.000 int       built-in array 1.000.000.000     =>  use std::vector as this can use maximum amount of RAM
-    // TODO: concrete structure of graph: lookup details in Julius code
     DataHandler data_handler{};
     std::vector<vertex_type> vertices {data_handler.create_vertices()};
     triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());
