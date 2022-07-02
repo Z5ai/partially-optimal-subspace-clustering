@@ -39,21 +39,20 @@ triple_costs_type DataHandler::create_triple_costs(int n){
     doc.ParseStream( isw );
 
 
-
-    std::vector<std::vector<std::vector<float>>> first_dim(n-2);
+    triple_costs_type first_dim(n-2);
     for(int i{0}; i < n - 2; i++){
 
-        std::vector<std::vector<float>> second_dim(n - i - 2);
+        std::vector<std::vector<float>> second_dim(n-i-2);
         for(int j{i+1}; j < n - 1; j++){
 
-            std::vector<float> third_dim(n - j - 1);
+            std::vector<float> third_dim(n-j-1);
             for(int k{j+1}; k < n; k++){
-                float cost{doc[i][j][k].GetFloat()};
-                third_dim.insert(third_dim.begin()+k-j-1 , cost);
+                float cost{doc[i][j-i-1][k-j-1].GetFloat()};
+                third_dim[k-j-1] = cost;
             }
-            second_dim.insert(second_dim.begin()+j-i-1 ,third_dim);
+            second_dim[j-i-1] = third_dim;
         }
-        first_dim.insert(first_dim.begin()+i, second_dim);
+        first_dim[i] = second_dim;
     }
     return first_dim;
 }
