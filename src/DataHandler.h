@@ -9,7 +9,7 @@ class DataHandler {
 public:
     void write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins);
 
-    triple_costs_type create_triple_costs(int v);
+    triple_costs_type create_triple_costs(int n);
 
     std::vector<vertex_type> create_vertices();
 };

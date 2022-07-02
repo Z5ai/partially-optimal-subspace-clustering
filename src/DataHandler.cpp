@@ -26,7 +26,7 @@ std::vector<vertex_type> DataHandler::create_vertices() {
     return vertices;
 }
 
-triple_costs_type DataHandler::create_triple_costs(int v){
+triple_costs_type DataHandler::create_triple_costs(int n){
 
     std::ifstream ifs {triple_costs_path};
     if ( !ifs.is_open() )
@@ -40,23 +40,24 @@ triple_costs_type DataHandler::create_triple_costs(int v){
 
 
 
-    std::vector<std::vector<std::vector<float>>> dim_o;
-    for(int o{0}; o < v; o++){
+    std::vector<std::vector<std::vector<float>>> first_dim(n-2);
+    for(int i{0}; i < n - 2; i++){
 
-        std::vector<std::vector<float>> dim_m;
-        for(int m{o+1}; m < v; m++){
+        std::vector<std::vector<float>> second_dim(n - i - 2);
+        for(int j{i+1}; j < n - 1; j++){
 
-            std::vector<float> dim_i;
-            for(int i{m+1}; i < v; i++){
-                float cost{doc[o][m][i].GetFloat()};
-                dim_i.push_back(cost);
+            std::vector<float> third_dim(n - j - 1);
+            for(int k{j+1}; k < n; k++){
+                float cost{doc[i][j][k].GetFloat()};
+                third_dim.insert(third_dim.begin()+k-j-1 , cost);
             }
-            dim_m.push_back(dim_i);
+            second_dim.insert(second_dim.begin()+j-i-1 ,third_dim);
         }
-        dim_o.push_back(dim_m);
+        first_dim.insert(first_dim.begin()+i, second_dim);
     }
-    return dim_o;
+    return first_dim;
 }
+
 
 void DataHandler::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){
     for(edge_type cut: cuts){

@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include "Constants.h"
 #include "DataHandler.h"
 
@@ -10,7 +11,6 @@ int main() {
     //  function GetTripleCost from GreedyMoving class, line 45 to access triplecostarray
     // std::array 1.000.000 int       built-in array 1.000.000.000     =>  use std::vector as this can use maximum amount of RAM
     // TODO: concrete structure of graph: lookup details in Julius code
-
     DataHandler data_handler{};
     std::vector<vertex_type> vertices {data_handler.create_vertices()};
     triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());
