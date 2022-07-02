@@ -4,6 +4,8 @@
 #include <vector>
 #include "DataHandler.h"
 #include "Constants.h"
+#include "istreamwrapper.h"
+#include "document.h"
 
 std::vector<vertex_type> DataHandler::create_vertices() {
     std::ifstream file;
@@ -26,6 +28,18 @@ std::vector<vertex_type> DataHandler::create_vertices() {
 
 triple_costs_type DataHandler::create_triple_costs(int v){
 
+    std::ifstream ifs {triple_costs_path};
+    if ( !ifs.is_open() )
+    {
+        std::cerr << "Could not open file for reading!\n";
+        throw std::exception();
+    }
+    rapidjson::IStreamWrapper isw { ifs };
+    rapidjson::Document doc {};
+    doc.ParseStream( isw );
+
+
+
     std::vector<std::vector<std::vector<float>>> dim_o;
     for(int o{0}; o < v; o++){
 
@@ -34,8 +48,7 @@ triple_costs_type DataHandler::create_triple_costs(int v){
 
             std::vector<float> dim_i;
             for(int i{m+1}; i < v; i++){
-                float cost;
-                //cost = json;
+                float cost{doc[o][m][i].GetFloat()};
                 dim_i.push_back(cost);
             }
             dim_m.push_back(dim_i);

@@ -1,12 +1,7 @@
-#include <iostream>
 #include <vector>
-#include <unordered_map>
-#include "document.h"
-#include "writer.h"
-#include "stringbuffer.h"
-#include "DataHandler.h"
-#include "Algorithms.h"
 #include "Constants.h"
+#include "DataHandler.h"
+
 
 int main() {
     // read data
@@ -16,19 +11,9 @@ int main() {
     // std::array 1.000.000 int       built-in array 1.000.000.000     =>  use std::vector as this can use maximum amount of RAM
     // TODO: concrete structure of graph: lookup details in Julius code
 
-
-
-
-
-
-
-
-
-
-
-//    DataHandler data_handler{};
-//    std::vector<vertex_type> vertices {data_handler.create_vertices()};
-//    triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());  // how?: parse triple_costs.json
+    DataHandler data_handler{};
+    std::vector<vertex_type> vertices {data_handler.create_vertices()};
+    triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());
 
     /*
     // evaluate data by partial optimality criterion
