@@ -57,7 +57,16 @@ triple_costs_type DataHandler::create_triple_costs(int n){
     return first_dim;
 }
 
-// TODO: write function to sort vertices and access costtriples
+
+float DataHandler::get_triple_costs(int i, int j, int k, triple_costs_type triple_costs) {
+    if (i > j)
+        std::swap(i, j);
+    if (i > k)
+        std::swap(i, k);
+    if (j > k)
+        std::swap(j, k);
+    return triple_costs.at(i).at(j-i-1).at(k-j-1);
+}
 
 
 void DataHandler::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){

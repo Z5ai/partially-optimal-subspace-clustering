@@ -13,6 +13,10 @@ int main() {
     std::vector<vertex_type> vertices {data_handler.create_vertices()};
     triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());
 
+    float cost = data_handler.get_triple_costs(4,3,5, triple_costs);
+
+
+
     /*
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};

@@ -12,6 +12,10 @@ public:
     triple_costs_type create_triple_costs(int n);
 
     std::vector<vertex_type> create_vertices();
+
+    float get_triple_costs(int i, int j, int k);
+
+    float get_triple_costs(int i, int j, int k, triple_costs_type triple_costs);
 };
 
 
