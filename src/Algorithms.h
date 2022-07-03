@@ -16,6 +16,13 @@ public:
 
     std::vector<edge_type>
     evaluate_triangle_criterion(std::vector<vertex_type> vertices, triple_costs_type triple_cost);
+
+    std::vector<edge_type>
+    evaluate_edge_criterion_cut(std::vector<vertex_type> vertices, triple_costs_type triple_cost, int n);
+
+    std::vector<std::array<int, 2>> pairs_from_component(std::vector<int> P);
+
+    std::vector<std::array<int, 1>> singles_from_component(std::vector<int> P);
 };
 
 

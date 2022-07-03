@@ -7,7 +7,7 @@
 #include "istreamwrapper.h"
 #include "document.h"
 
-std::vector<vertex_type> DataHandler::create_vertices() {
+std::vector<vertex_type> DataHandler::create_vertices(){
     std::ifstream file;
     file.open(synthesized_instance_path);
     std::string l;
