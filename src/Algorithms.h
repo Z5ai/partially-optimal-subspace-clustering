@@ -23,6 +23,10 @@ public:
     std::vector<std::array<int, 2>> pairs_from_component(std::vector<int> P);
 
     std::vector<std::array<int, 1>> singles_from_component(std::vector<int> P);
+
+    std::vector<std::array<int, 3>> synthesize_triples(singles_type singles, pairs_type pairs);
+
+    triples_type get_triples_at_border_of_component_U(int n_vertices, std::vector<int> U);
 };
 
 

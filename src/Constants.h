@@ -10,7 +10,9 @@ typedef std::array<float,3> vertex_type;
 typedef std::array<int,2> edge_type;
 typedef std::vector<std::vector<std::vector<float>>> triple_costs_type;
 typedef std::unordered_map<std::string, std::vector<edge_type>> constraints_map;
-
+typedef std::vector<std::array<int,1>> singles_type;
+typedef std::vector<std::array<int,2>> pairs_type;
+typedef std::vector<std::array<int,3>> triples_type;
 
 
 //Settings
