@@ -1,20 +1,18 @@
 #include <vector>
 #include <iostream>
 #include "Constants.h"
-#include "TripleCosts.h"
-
+#include "Graph/TripleCosts.h"
 
 int main() {
     // TODO: restructuring: put local-search-algorithm project into dependencies folder. make partial-optimal subspace-clustering to main project. call go script here in main function.
-    // TODO: erase this and use later instead of vertices.size() a new parameter n_plane, n_vertices_per_plane, n_vertices = n_vertices_per_plane * n_plane which is also used for call of go script
-    // TODO: make own class for triple_costs
     // TODO: write tests
+    // flag -stddev(sigma): 0.03:much 0.01:little(try this and then smaller values) 0.001:very_little
+    // flag -constraintFile is optional (path to constraints.json file)
+    // path and name for storing synthesized_instance.csv and triple_costs.json can be set individually in call 1 and 2. In command 3 and 4 the same names must be used again
+    $ go test ./src/partitioning3D/evaluation/ -run=^TestSaveTestDataToFile$ -numberOfPlanes 3 -pointsPerPlane 33 -mean 0 -stddev 0.1 -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv
+    $ go test ./src/partitioning3D/evaluation/ -run=^TestSaveCostToFile$ -inputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/triple_costs.json -threshold 0.001 -amplification 3
     // read data
-    //  function GetTripleCost from GreedyMoving class, line 45 to access triplecostarray
     TripleCosts triple_costs{n_vertices};
-    float cost = triple_costs.get_triple_cost(4, 3, 5);
-
-
 
     /*
     // evaluate data by partial optimality criterion
