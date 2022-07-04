@@ -1,19 +1,18 @@
 #include <vector>
 #include <iostream>
 #include "Constants.h"
-#include "DataHandler.h"
+#include "TripleCosts.h"
 
 
 int main() {
     // TODO: restructuring: put local-search-algorithm project into dependencies folder. make partial-optimal subspace-clustering to main project. call go script here in main function.
-
+    // TODO: erase this and use later instead of vertices.size() a new parameter n_plane, n_vertices_per_plane, n_vertices = n_vertices_per_plane * n_plane which is also used for call of go script
+    // TODO: make own class for triple_costs
+    // TODO: write tests
     // read data
     //  function GetTripleCost from GreedyMoving class, line 45 to access triplecostarray
-    DataHandler data_handler{};
-    std::vector<vertex_type> vertices {data_handler.create_vertices()};
-    triple_costs_type triple_costs = data_handler.create_triple_costs(vertices.size());
-
-    float cost = data_handler.get_triple_costs(4,3,5, triple_costs);
+    TripleCosts triple_costs{n_vertices};
+    float cost = triple_costs.get_triple_cost(4, 3, 5);
 
 
 
@@ -38,7 +37,7 @@ int main() {
 
     // write data
     // map -> json
-    data_handler.write_constraints(cuts, joins);
+    trip.write_constraints(cuts, joins);
      */
     return 0;
 }

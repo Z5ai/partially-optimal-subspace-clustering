@@ -2,12 +2,12 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "DataHandler.h"
+#include "TripleCosts.h"
 #include "Constants.h"
 #include "istreamwrapper.h"
 #include "document.h"
 
-std::vector<vertex_type> DataHandler::create_vertices(){
+std::vector<vertex_type> TripleCosts::create_vertices(){
     std::ifstream file;
     file.open(synthesized_instance_path);
     std::string l;
@@ -26,11 +26,11 @@ std::vector<vertex_type> DataHandler::create_vertices(){
     return vertices;
 }
 
-triple_costs_type DataHandler::create_triple_costs(int n){
+//TODO: move create_triple_costs into constructor
+triple_costs_type TripleCosts::create_triple_costs(int n){
     std::ifstream ifs {triple_costs_path};
     if ( !ifs.is_open() )
     {
-
         std::cerr << "Could not open file for reading!\n";
         throw std::exception();
     }
@@ -57,8 +57,7 @@ triple_costs_type DataHandler::create_triple_costs(int n){
     return first_dim;
 }
 
-
-float DataHandler::get_triple_costs(int i, int j, int k, triple_costs_type triple_costs) {
+float TripleCosts::get_triple_cost(int i, int j, int k, triple_costs_type triple_costs) {
     if (i > j)
         std::swap(i, j);
     if (i > k)
@@ -68,8 +67,7 @@ float DataHandler::get_triple_costs(int i, int j, int k, triple_costs_type tripl
     return triple_costs.at(i).at(j-i-1).at(k-j-1);
 }
 
-
-void DataHandler::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){
+void TripleCosts::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){
     for(edge_type cut: cuts){
 
     }
