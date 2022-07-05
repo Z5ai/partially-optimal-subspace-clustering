@@ -1,15 +1,15 @@
+#define FMT_HEADER_ONLY
 #include <vector>
+#include <core.h>
 #include <iostream>
+#include <fstream>
 #include "Constants.h"
 #include "Graph/TripleCosts.h"
 
 int main() {
-    // TODO: write tests
-    // flag -stddev(sigma): 0.03:much 0.01:little(try this and then smaller values) 0.001:very_little
-    // flag -constraintFile is optional (path to constraints.json file)
-    // path and name for storing synthesized_instance.csv and triple_costs.json can be set individually in call 1 and 2. In command 3 and 4 the same names must be used again
-    std::system("go test ./src/partitioning3D/evaluation/ -run=^TestSaveTestDataToFile$ -numberOfPlanes 3 -pointsPerPlane 33 -mean 0 -stddev 0.1 -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv");
-    std::system("go test ./src/partitioning3D/evaluation/ -run=^TestSaveCostToFile$ -inputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/triple_costs.json -threshold 0.001 -amplification 3");
+    // create data
+    std::system(fmt::format("cd {} && go test {} -run=^TestSaveTestDataToFile$ -numberOfPlanes {} -pointsPerPlane {} -mean 0 -stddev {} -outputFile {}", go_project_path, go_script_path, n_planes, n_vertices_per_plane, stddev, synthesized_instance_path).c_str());
+    std::system(fmt::format("cd {} && go test {} -run=^TestSaveCostToFile$ -inputFile {} -outputFile {} -threshold {} -amplification 3", go_project_path, go_script_path, synthesized_instance_path, triple_costs_path, 3 * stddev).c_str());
     TripleCosts triple_costs{n_vertices};
 
     /*
