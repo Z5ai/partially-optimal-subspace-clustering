@@ -4,14 +4,12 @@
 #include "Graph/TripleCosts.h"
 
 int main() {
-    // TODO: restructuring: put local-search-algorithm project into dependencies folder. make partial-optimal subspace-clustering to main project. call go script here in main function.
     // TODO: write tests
     // flag -stddev(sigma): 0.03:much 0.01:little(try this and then smaller values) 0.001:very_little
     // flag -constraintFile is optional (path to constraints.json file)
     // path and name for storing synthesized_instance.csv and triple_costs.json can be set individually in call 1 and 2. In command 3 and 4 the same names must be used again
-    $ go test ./src/partitioning3D/evaluation/ -run=^TestSaveTestDataToFile$ -numberOfPlanes 3 -pointsPerPlane 33 -mean 0 -stddev 0.1 -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv
-    $ go test ./src/partitioning3D/evaluation/ -run=^TestSaveCostToFile$ -inputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/triple_costs.json -threshold 0.001 -amplification 3
-    // read data
+    std::system("go test ./src/partitioning3D/evaluation/ -run=^TestSaveTestDataToFile$ -numberOfPlanes 3 -pointsPerPlane 33 -mean 0 -stddev 0.1 -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv");
+    std::system("go test ./src/partitioning3D/evaluation/ -run=^TestSaveCostToFile$ -inputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/synthesized_instance.csv -outputFile /home/david/3_01__educ__TUD/INF-PM-FPA/subspace-clustering/data/triple_costs.json -threshold 0.001 -amplification 3");
     TripleCosts triple_costs{n_vertices};
 
     /*
