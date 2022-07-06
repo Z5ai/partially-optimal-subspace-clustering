@@ -15,7 +15,7 @@ const bool edge_criterion_join{false};
 const bool triangle_criterion{false};
 
 //Paths
-const std::string project_path{R"(~/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering)"};
+const std::string project_path{R"(/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering)"};
 
 const std::string temp_path{project_path + R"(/temp)"};
 const std::string triple_costs_path{temp_path + "/triple_costs.json"};

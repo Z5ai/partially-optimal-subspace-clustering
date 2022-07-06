@@ -7,12 +7,6 @@
 #include "document.h"
 
 TripleCosts::TripleCosts(int n_vertices) {
-//    try {
-//        m_ifs.open("C:\\Users\\guyth\\Documents\\test.txt", fstream::in);
-//    }
-//    catch (std::ifstream::failure e) {
-//        std::cerr << "Exception opening file: " << std::strerror(errno) << "\n";
-//    }
     std::ifstream ifs{triple_costs_path};
     if (!ifs.is_open()) {
         std::cerr << "Could not open file for reading!\n";
