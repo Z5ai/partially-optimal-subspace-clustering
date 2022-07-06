@@ -12,6 +12,8 @@ int main() {
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveCostToFile$ -inputFile {} -outputFile {} -threshold {} -amplification 3", go_project_path, go_script_path, synthesized_instance_path, triple_costs_path, 3 * stddev).c_str());
     TripleCosts triple_costs{n_vertices};
 
+
+
     /*
     // evaluate data by partial optimality criterion
     Algorithms algorithms{};

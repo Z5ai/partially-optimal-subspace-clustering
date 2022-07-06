@@ -2,7 +2,9 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERION_H
 
 
-class EdgeCriterion {
+#include "PersistencyCriterion.h"
+
+class EdgeCriterion: public PersistencyCriterion{
 
 };
 

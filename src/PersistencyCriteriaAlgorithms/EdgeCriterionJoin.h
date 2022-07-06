@@ -2,7 +2,9 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONJOIN_H
 
 
-class EdgeCriterionJoin {
+#include "EdgeCriterion.h"
+
+class EdgeCriterionJoin: public EdgeCriterion {
 
 };
 

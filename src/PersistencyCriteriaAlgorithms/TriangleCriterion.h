@@ -2,7 +2,9 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLECRITERION_H
 
 
-class TriangleCriterion {
+#include "PersistencyCriterion.h"
+
+class TriangleCriterion: public PersistencyCriterion {
 
 };
 
