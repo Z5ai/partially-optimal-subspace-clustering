@@ -11,6 +11,7 @@ const int n_vertices_per_plane{33};
 const int n_vertices{n_planes * n_vertices_per_plane};
 const float stddev{0.01};
 const bool edge_criterion_cut{true};
+const int edge_criterion_cut_U_max_size{1};
 const bool edge_criterion_join{false};
 const bool triangle_criterion{false};
 

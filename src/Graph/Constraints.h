@@ -3,17 +3,24 @@
 
 
 class Constraints {
+    std::vector<std::array<int,2>> cuts;
+    std::vector<std::array<int,2>> joins;
 
+public:
+    Constraints() {}
+
+    void insert_cut(int a, int b){
+        cuts.push_back({a,b});
+    }
+
+    void insert_join(int a, int b){
+        joins.push_back({a,b});
+    }
+
+    void write_to_json(){
+
+    }
 };
-
-//void TripleCosts::write_constraints(std::vector<edge_type> cuts, std::vector<edge_type> joins){
-//    for(edge_type cut: cuts){
-//
-//    }
-//    for(edge_type join: joins){
-//
-//    }
-//}
 
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_CONSTRAINTS_H
