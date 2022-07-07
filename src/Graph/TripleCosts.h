@@ -14,7 +14,7 @@ class TripleCosts {
 
 
 public:
-    TripleCosts(int n_vertices) {
+    TripleCosts() {
         std::ifstream ifs{triple_costs_path};
         if (!ifs.is_open()) {
             std::cerr << "Could not open file for reading!\n";
@@ -25,7 +25,7 @@ public:
         doc.ParseStream(isw);
 
 
-        triple_costs.reserve(n_vertices - 2);
+        triple_costs.resize(n_vertices - 2);
         for (int i{0}; i < n_vertices - 2; i++) {
 
             std::vector<std::vector<float>> second_dim(n_vertices - i - 2);
@@ -42,7 +42,7 @@ public:
         }
     }
 
-    float get_triple_cost(int i, int j, int k) const {
+    float get_cost(int i, int j, int k) const {
         if (i > j)
             std::swap(i, j);
         if (i > k)

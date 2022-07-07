@@ -11,7 +11,7 @@ int main() {
     // create data
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveTestDataToFile$ -numberOfPlanes {} -pointsPerPlane {} -mean 0 -stddev {} -outputFile {}", go_project_path, go_script_path, n_planes, n_vertices_per_plane, stddev, synthesized_instance_path).c_str());
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveCostToFile$ -inputFile {} -outputFile {} -threshold {} -amplification 3", go_project_path, go_script_path, synthesized_instance_path, triple_costs_path, 3 * stddev).c_str());
-    TripleCosts triple_costs{n_vertices};
+    TripleCosts triple_costs{};
     Constraints constraints{};
 
     // evaluate data by partial optimality criterion
