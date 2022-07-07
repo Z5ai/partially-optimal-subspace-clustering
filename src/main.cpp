@@ -1,8 +1,6 @@
 #define FMT_HEADER_ONLY
 #include <vector>
 #include <core.h>
-#include <iostream>
-#include <fstream>
 #include "Constants.h"
 #include "Graph/TripleCosts.h"
 #include "PersistencyCriteriaAlgorithms/EdgeCriterionCut.h"
@@ -30,6 +28,5 @@ int main() {
 
     // write data
     constraints.write_to_json();
-
     return 0;
 }

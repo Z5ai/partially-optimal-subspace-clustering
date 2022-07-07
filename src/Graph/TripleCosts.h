@@ -3,6 +3,8 @@
 
 
 #include <vector>
+#include <fstream>
+#include <iostream>
 #include "../Constants.h"
 #include "istreamwrapper.h"
 #include "document.h"

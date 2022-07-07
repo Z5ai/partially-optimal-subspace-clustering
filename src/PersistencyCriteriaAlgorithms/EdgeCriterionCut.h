@@ -35,30 +35,40 @@ public:
         return true;
     }
 
+    void evaluate_U_size_1(){
+        for (int u{0}; u<n_vertices; u++)
+            // for U = {u} query edge_cut_criterion
+            if(evaluate_all_triples_to_one_vertex(u) == true)
+                // write result into constraints: cut U = {u}
+                for(int r{0}; r<n_vertices && r!=u; r++)
+                    constraints.insert_cut(u, r);
+    }
+
+    // can be optimized by using return from 'evaluate_U_size_1()' as parameterinput. replace time by memory.
+    void evaluate_U_size_2(){
+        for (int u{0}; u<n_vertices; u++)
+            for (int v{u+1}; v<n_vertices; v++)
+                // for U = {u,v} query edge_cut_criterion
+                if(evaluate_all_triples_to_one_vertex(u) == true
+                && evaluate_all_triples_to_one_vertex(v) == true
+                && evaluate_all_triples_to_two_vertices(u,v) == true){
+                    // write result into constraints: cut U = {u,v}
+                    for(int r{0}; r<n_vertices && r!=u && r!=v; r++)
+                        constraints.insert_cut(u, r);
+                    for(int r{0}; r<n_vertices && r!=u && r!=v; r++)
+                        constraints.insert_cut(v, r);
+                }
+    }
+
     void iterate_all_U(int U_max_size){
         switch(U_max_size){
             // |U| <= 1
             case 1:
-                for (int u{0}; u<n_vertices; u++)
-                    // for U = {u} query edge_cut_criterion
-                    if(evaluate_all_triples_to_one_vertex(u) == true)
-                        for(int r{0}; r<n_vertices && r!=u; r++)
-                            constraints.insert_cut(u, r);
-
+                evaluate_U_size_1();
             // |U| <= 2
             case 2:
-                for (int u{0}; u<n_vertices; u++)
-                    for (int v{u+1}; v<n_vertices; v++)
-                        // for U = {u,v} query edge_cut_criterion
-                        if(evaluate_all_triples_to_one_vertex(u) == true
-                        // this can be optimized by using memory
-                        && evaluate_all_triples_to_one_vertex(v) == true
-                        && evaluate_all_triples_to_two_vertices(u,v) == true){
-                            for(int r{0}; r<n_vertices && r!=u && r!=v; r++)
-                                constraints.insert_cut(u, r);
-                            for(int r{0}; r<n_vertices && r!=u && r!=v; r++)
-                                constraints.insert_cut(v, r);
-                        }
+                evaluate_U_size_1();
+                evaluate_U_size_2();
         }
     }
 };
