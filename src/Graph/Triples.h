@@ -1,5 +1,5 @@
-#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLECOSTS_H
-#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLECOSTS_H
+#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H
+#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H
 
 
 #include <vector>
@@ -9,12 +9,12 @@
 #include "istreamwrapper.h"
 #include "document.h"
 
-class TripleCosts {
+class Triples {
     std::vector<std::vector<std::vector<float>>> triple_costs;
 
 
 public:
-    TripleCosts() {
+    Triples() {
         std::ifstream ifs{triple_costs_path};
         if (!ifs.is_open()) {
             std::cerr << "Could not open file for reading!\n";
@@ -53,4 +53,4 @@ public:
     }
 };
 
-#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLECOSTS_H
+#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H

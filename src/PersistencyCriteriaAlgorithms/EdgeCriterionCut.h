@@ -9,7 +9,7 @@ class EdgeCriterionCut: public PersistencyCriterion {
 
 
 public:
-    EdgeCriterionCut(TripleCosts& triple_costs, Constraints& constraints)
+    EdgeCriterionCut(Triples& triple_costs, Constraints& constraints)
         : PersistencyCriterion{triple_costs, constraints}{
     }
 
@@ -18,7 +18,7 @@ public:
             if (i==u) continue;
             for(int j{i+1}; j<n_vertices; j++){
                 if (j==u) continue;
-                float cost = triple_costs.get_cost(u, i, j);
+                float cost = triples.get_cost(u, i, j);
                 if(cost < 0)
                     // there is a negative triple
                     return false;
@@ -30,7 +30,7 @@ public:
     bool evaluate_all_triples_to_two_vertices(int u, int v){
         for(int i{0}; i<n_vertices; i++){
             if (i==u || i==v) continue;
-            float cost = triple_costs.get_cost(u, v, i);
+            float cost = triples.get_cost(u, v, i);
             if(cost < 0)
                 // there is a negative triple
                 return false;
@@ -69,17 +69,6 @@ public:
                 }
     }
 
-    void iterate_all_U(int U_max_size){
-        switch(U_max_size){
-            // |U| <= 1
-            case 1:
-                evaluate_U_size_1();
-            // |U| <= 2
-            case 2:
-                evaluate_U_size_1();
-                evaluate_U_size_2();
-        }
-    }
 };
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONCUT_H
