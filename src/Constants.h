@@ -6,11 +6,11 @@
 #include <unordered_map>
 
 //Settings
-const int n_planes{33};
-const int n_vertices_per_plane{2};
+const int n_planes{3};
+const int n_vertices_per_plane{33};
 const int n_vertices{n_planes * n_vertices_per_plane};
-const float stddev{0.001};
-const float threshold_factor{0.03};
+const float stddev{1000000000};
+const float threshold_factor{3};
 const float threshold{threshold_factor * stddev};
 const bool edge_criterion_cut{true};
 const bool edge_criterion_join{false};
