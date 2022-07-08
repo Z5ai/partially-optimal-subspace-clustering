@@ -4,17 +4,18 @@
 
 #include <string>
 #include <unordered_map>
+enum Mode {EDGE, TRIANGLE};
 
 //Settings
+
 const int n_planes{3};
-const int n_vertices_per_plane{33};
+const int n_vertices_per_plane{2};
 const int n_vertices{n_planes * n_vertices_per_plane};
-const float stddev{1000000000};
-const float threshold_factor{3};
+const float stddev{0.01};
+const float threshold_factor{0};
 const float threshold{threshold_factor * stddev};
-const bool edge_criterion_cut{true};
-const bool edge_criterion_join{false};
-const bool triangle_criterion{false};
+const Mode mode{edge_criterion_cut};
+
 
 //Paths
 const std::string project_path{R"(/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering)"};

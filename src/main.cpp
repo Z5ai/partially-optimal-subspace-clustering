@@ -8,7 +8,6 @@
 
 int main() {
     //TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
-    //TODO implementation: triangle criterion: calculate all singlets, duplets, triplets and then combine them. maybe do only singlets
     //TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative triples at once, if this triple do not influence each other
     //TODO presentation:
     // 1. Proof: define notation, explain mappings p(x), join_mapping and cut_mapping are valide: map from multicut to multicut(reference to paper): but also combinations of mappings are valid
@@ -25,18 +24,18 @@ int main() {
     Constraints constraints{};
 
     // evaluate data by partial optimality criterion
-    if(edge_criterion_cut==true){
-        EdgeCriterionCut edge_criterion_cut{triple_costs, constraints};
-        //TODO: stddev 0.001 threshold_factor 0.03 (the smaller boths values, the more cuts are found)
-        // 450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
-        edge_criterion_cut.evaluate_U_size_1();
-        //edge_criterion_cut.evaluate_U_size_2();
-    }
-    if(edge_criterion_join==true){
-
-    }
-    if(triangle_criterion==true){
-
+    switch(mode){
+        case(EDGE):{
+            std::cout<< "edge";
+            EdgeCriterionCut edge_criterion_cut{triple_costs, constraints};
+            // TODO: stddev 0.001 threshold_factor 0.03 (the smaller boths values, the more cuts are found)
+            //  450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
+            edge_criterion_cut.evaluate_U_size_1();
+            //edge_criterion_cut.evaluate_U_size_2();
+        }
+        case(TRIANGLE):{
+            std::cout<< "triangle";
+        }
     }
 
     // write data

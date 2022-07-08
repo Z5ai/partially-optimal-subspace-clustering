@@ -3,8 +3,21 @@
 
 
 #include "PersistencyCriterion.h"
+//TODO implementation: triangle criterion: calculate all singlets, duplets, triplets and then combine them. maybe do only singlets
 
 class TriangleCriterion: public PersistencyCriterion {
+public:
+    void find_singlets(){
+
+    }
+
+    void find_duplets(){
+
+    }
+
+    void find_triplets(){
+
+    }
 
 };
 
