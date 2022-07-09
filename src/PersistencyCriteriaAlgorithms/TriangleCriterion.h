@@ -59,9 +59,9 @@ public:
     bool evaluate_one_triangle(int u, int v, int w, std::vector<float> costs_singlet){
         //terms for right side of inequality
         float c_uvw = triples.get_cost(u, v, w);
-        float c_Tuw_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, w) - (std::max(0.0f, c_uvw);
-        float c_Tuv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, v) - (std::max(0.0f, c_uvw);
-        float c_Twv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(w, v) - (std::max(0.0f, c_uvw);
+        float c_Tuw_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, w) - (std::max(0.0f, c_uvw));
+        float c_Tuv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, v) - (std::max(0.0f, c_uvw));
+        float c_Twv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(w, v) - (std::max(0.0f, c_uvw));
         float c_Tduvw_neg_wo_Tuw_Tuv_Tvw = get_costs_neg_with_only_one_vertex_in_triangle(u, v, w);
         //terms for left side of inequality
         float c_Tuw_abs =  get_costs_abs_to_two_vertices(u,w);

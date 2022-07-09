@@ -14,7 +14,7 @@ const int n_vertices{n_planes * n_vertices_per_plane};
 const float stddev{0.01};
 const float threshold_factor{0};
 const float threshold{threshold_factor * stddev};
-const Mode mode{edge_criterion_cut};
+const Mode mode{TRIANGLE};
 
 
 //Paths
