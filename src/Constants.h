@@ -9,10 +9,10 @@ enum Mode {EDGE, TRIANGLE};
 //Settings
 
 const int n_planes{3};
-const int n_vertices_per_plane{2};
+const int n_vertices_per_plane{33};
 const int n_vertices{n_planes * n_vertices_per_plane};
 const float stddev{0.01};
-const float threshold_factor{0};
+const float threshold_factor{3};
 const float threshold{threshold_factor * stddev};
 const Mode mode{TRIANGLE};
 

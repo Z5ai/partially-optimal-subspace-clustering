@@ -7,16 +7,17 @@
 #include "Graph/Constraints.h"
 #include "PersistencyCriteriaAlgorithms/TriangleCriterion.h"
 
-int main() {
-    //TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
-    //TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative triples at once, if this triple do not influence each other
-    //TODO presentation:
-    // 1. Proof: define notation, explain mappings p(x), join_mapping and cut_mapping are valide: map from multicut to multicut(reference to paper): but also combinations of mappings are valid
-    // 2. Implementation:
-    // 3. Result of Implementation: result in table. discuss bad results!: reason are also synthesized instances (planes) and their costs. to one vertex there will be two other vertices from synthesized plane, where cost is negative, but we need all costs to be positive to cut outlier. But algorithm tests work.
+//TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
+//TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative triples at once, if this triple do not influence each other
+//TODO presentation:
+// 1. Proof: define notation, explain mappings p(x), join_mapping and cut_mapping are valide: map from multicut to multicut(reference to paper): but also combinations of mappings are valid
+// 2. Implementation:
+// 3. Result of Implementation: result in table. discuss bad results!: reason are also synthesized instances (planes) and their costs. to one vertex there will be two other vertices from synthesized plane, where cost is negative, but we need all costs to be positive to cut outlier. But algorithm tests work.
 
-    // TODO until monday: 1) implement triangle criterion and maybe tests
-    //  after that: 2) discuss results + presentation
+// TODO until monday: 1) implement triangle criterion and maybe tests
+//  after that: 2) discuss results + presentation
+
+int main() {
 
     // create data
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveTestDataToFile$ -numberOfPlanes {} -pointsPerPlane {} -mean 0 -stddev {} -outputFile {}", go_project_path, go_script_path, n_planes, n_vertices_per_plane, stddev, synthesized_instance_path).c_str());
@@ -37,6 +38,7 @@ int main() {
         case(TRIANGLE):{
             std::cout<< "triangle criterion";
             TriangleCriterion triangleCriterion{triple_costs, constraints};
+            // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
             triangleCriterion.evaluate_all_triangles_with_singlets();
         }
     }
