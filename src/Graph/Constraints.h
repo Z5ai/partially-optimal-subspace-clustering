@@ -21,8 +21,15 @@ public:
         joins.push_back({a,b});
     }
 
-    void write_to_json(){
+    std::vector<std::array<int, 2>> getCuts() {
+        return cuts;
+    }
 
+    std::vector<std::array<int, 2>> getJoins() {
+        return joins;
+    }
+
+    void write_to_json(){
 
         //create document
         rapidjson::Document doc;

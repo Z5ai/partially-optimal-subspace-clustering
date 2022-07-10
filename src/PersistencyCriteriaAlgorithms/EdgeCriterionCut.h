@@ -10,15 +10,15 @@ class EdgeCriterionCut: public PersistencyCriterion {
 
 
 public:
-    EdgeCriterionCut(Triples& triple_costs, Constraints& constraints)
-        : PersistencyCriterion{triple_costs, constraints}{
+    EdgeCriterionCut(Instance& instance, Constraints& constraints, int n_vertices)
+        : PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
     // returns true, if all costs to one vertex u are zero or positive
     bool evaluate_all_triples_to_one_vertex(int u){
         for(int i{0}; i<n_vertices; i++){ if(i==u) continue;
             for(int j{i+1}; j<n_vertices; j++){ if(j==u) continue;
-                float cost = triples.get_cost(u, i, j);
+                float cost = instance.get_cost(u, i, j);
                 if(cost < 0)
                     // there is a negative triple
                     return false;
@@ -30,7 +30,7 @@ public:
     // returns true, if all costs to two vertices u,v are zero or positive
     bool evaluate_all_triples_to_two_vertices(int u, int v){
         for(int i{0}; i<n_vertices; i++){ if(i==u || i==v) continue;
-            float cost = triples.get_cost(u, v, i);
+            float cost = instance.get_cost(u, v, i);
             if(cost < 0)
                 // there is a negative triple
                 return false;

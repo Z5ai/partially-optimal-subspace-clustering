@@ -2,16 +2,18 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_PERSISTENCYCRITERION_H
 
 
-#include "../Graph/Triples.h"
+#include "../Graph/Instance.h"
 #include "../Graph/Constraints.h"
 
 class PersistencyCriterion {
 protected:
-    const Triples& triples;
+    const Instance& instance;
     Constraints& constraints;
+    int n_vertices{};
+
 public:
-    PersistencyCriterion(Triples& triple_costs, Constraints& constraints)
-        : triples{triple_costs}, constraints{constraints}{
+    PersistencyCriterion(Instance& instance, Constraints& constraints, int n_vertices)
+        : instance{instance}, constraints{constraints}, n_vertices{n_vertices}{
     }
 };
 

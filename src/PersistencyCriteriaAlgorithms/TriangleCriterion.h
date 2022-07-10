@@ -10,8 +10,8 @@
 class TriangleCriterion: public PersistencyCriterion {
 
 public:
-    TriangleCriterion(Triples& triple_costs, Constraints& constraints)
-    : PersistencyCriterion{triple_costs, constraints}{
+    TriangleCriterion(Instance& instance, Constraints& constraints, int n_vertices)
+    : PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
     std::vector<float> create_costs_abs_singlet(){
@@ -20,7 +20,7 @@ public:
             float singlet_cost;
             for(int i{0}; i<n_vertices; i++){ if(i==u) continue;
                 for(int j{i+1}; j<n_vertices; j++){ if(j==u) continue;
-                    singlet_cost += std::abs(triples.get_cost(u, i, j));
+                    singlet_cost += std::abs(instance.get_cost(u, i, j));
                 }
             }
             singlets.push_back(singlet_cost);
@@ -31,7 +31,7 @@ public:
     float get_costs_abs_to_two_vertices(int u, int v){
         float sum{0};
         for(int i{0}; i<n_vertices; i++){ if(i==u || i==v) continue;
-            sum += std::abs(triples.get_cost(u,v,i));
+            sum += std::abs(instance.get_cost(u, v, i));
         }
         return sum;
     }
@@ -39,7 +39,7 @@ public:
     float get_costs_pos_to_two_vertices(int u, int v){
         float sum{0};
         for(int i{0}; i<n_vertices; i++){ if(i==u || i==v) continue;
-            sum += std::max(0.0f, triples.get_cost(u,v,i));
+            sum += std::max(0.0f, instance.get_cost(u, v, i));
         }
         return sum;
     }
@@ -48,9 +48,9 @@ public:
         float sum{0};
         for(int i{0}; i<n_vertices; i++){ if(i==u || i==v || i==w) continue;
             for(int j{i+1}; j<n_vertices; j++){ if(j==u || j==v || j==w) continue;
-                sum += std::min(0.0f, triples.get_cost(u, i, j));
-                sum += std::min(0.0f, triples.get_cost(v, i, j));
-                sum += std::min(0.0f, triples.get_cost(w, i, j));
+                sum += std::min(0.0f, instance.get_cost(u, i, j));
+                sum += std::min(0.0f, instance.get_cost(v, i, j));
+                sum += std::min(0.0f, instance.get_cost(w, i, j));
             }
         }
         return sum;
@@ -58,7 +58,7 @@ public:
 
     bool evaluate_one_triangle(int u, int v, int w, std::vector<float> costs_singlet){
         //terms for right side of inequality
-        float c_uvw = triples.get_cost(u, v, w);
+        float c_uvw = instance.get_cost(u, v, w);
         float c_Tuw_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, w) - (std::max(0.0f, c_uvw));
         float c_Tuv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, v) - (std::max(0.0f, c_uvw));
         float c_Twv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(w, v) - (std::max(0.0f, c_uvw));

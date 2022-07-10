@@ -1,20 +1,23 @@
-#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H
-#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H
+#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_INSTANCE_H
+#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_INSTANCE_H
 
 
+#include <utility>
 #include <vector>
 #include <fstream>
 #include <iostream>
 #include "../Constants.h"
 #include "istreamwrapper.h"
 #include "document.h"
+#include "Constraints.h"
 
-class Triples {
+class Instance {
     std::vector<std::vector<std::vector<float>>> triple_costs;
+    int n_vertices{};
 
 
 public:
-    Triples() {
+    Instance(int n_vertices): n_vertices{n_vertices} {
         std::ifstream ifs{triple_costs_path};
         if (!ifs.is_open()) {
             std::cerr << "Could not open file for reading!\n";
@@ -25,14 +28,14 @@ public:
         doc.ParseStream(isw);
 
 
-        triple_costs.resize(n_vertices - 2);
-        for (int i{0}; i < n_vertices - 2; i++) {
+        triple_costs.resize(this->n_vertices - 2);
+        for (int i{0}; i < this->n_vertices - 2; i++) {
 
-            std::vector<std::vector<float>> second_dim(n_vertices - i - 2);
-            for (int j{i + 1}; j < n_vertices - 1; j++) {
+            std::vector<std::vector<float>> second_dim(this->n_vertices - i - 2);
+            for (int j{i + 1}; j < this->n_vertices - 1; j++) {
 
-                std::vector<float> third_dim(n_vertices - j - 1);
-                for (int k{j + 1}; k < n_vertices; k++) {
+                std::vector<float> third_dim(this->n_vertices - j - 1);
+                for (int k{j + 1}; k < this->n_vertices; k++) {
                     float cost{doc[i][j - i - 1][k - j - 1].GetFloat()};
                     third_dim[k - j - 1] = cost;
                 }
@@ -40,6 +43,14 @@ public:
             }
             triple_costs[i] = second_dim;
         }
+    }
+
+    Instance(int n_vertices, std::vector<std::vector<std::vector<float>>> triple_costs):
+        n_vertices{n_vertices},triple_costs{std::move(triple_costs)}{
+    }
+
+    int get_n_vertices() const {
+        return n_vertices;
     }
 
     float get_cost(int i, int j, int k) const {
@@ -53,4 +64,4 @@ public:
     }
 };
 
-#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIPLES_H
+#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_INSTANCE_H

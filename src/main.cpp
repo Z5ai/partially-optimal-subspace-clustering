@@ -2,13 +2,13 @@
 #include <vector>
 #include <core.h>
 #include "Constants.h"
-#include "Graph/Triples.h"
+#include "Graph/Instance.h"
 #include "PersistencyCriteriaAlgorithms/EdgeCriterionCut.h"
 #include "Graph/Constraints.h"
 #include "PersistencyCriteriaAlgorithms/TriangleCriterion.h"
 
 //TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
-//TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative triples at once, if this triple do not influence each other
+//TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative instance at once, if this triple do not influence each other
 //TODO presentation:
 // 1. Proof: define notation, explain mappings p(x), join_mapping and cut_mapping are valide: map from multicut to multicut(reference to paper): but also combinations of mappings are valid
 // 2. Implementation:
@@ -22,24 +22,23 @@ int main() {
     // create data
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveTestDataToFile$ -numberOfPlanes {} -pointsPerPlane {} -mean 0 -stddev {} -outputFile {}", go_project_path, go_script_path, n_planes, n_vertices_per_plane, stddev, synthesized_instance_path).c_str());
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveCostToFile$ -inputFile {} -outputFile {} -threshold {} -amplification 3", go_project_path, go_script_path, synthesized_instance_path, triple_costs_path, threshold).c_str());
-    Triples triple_costs{};
+    Instance instance{n_vertices};
     Constraints constraints{};
 
     // evaluate data by partial optimality criterion
     switch(mode){
         case(EDGE):{
-            std::cout<< "edge criterion";
-            EdgeCriterionCut edge_criterion_cut{triple_costs, constraints};
             // TODO: stddev 0.001 threshold_factor 0.03 (the smaller boths values, the more cuts are found)
             //  450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
+            EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
             edge_criterion_cut.evaluate_U_size_1();
-            //edge_criterion_cut.evaluate_U_size_2();
+            break;
         }
         case(TRIANGLE):{
-            std::cout<< "triangle criterion";
-            TriangleCriterion triangleCriterion{triple_costs, constraints};
             // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
+            TriangleCriterion triangleCriterion{instance, constraints, n_vertices};
             triangleCriterion.evaluate_all_triangles_with_singlets();
+            break;
         }
     }
 
