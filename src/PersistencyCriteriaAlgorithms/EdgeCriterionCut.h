@@ -64,7 +64,6 @@ public:
                     }
                 }
     }
-
 };
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONCUT_H

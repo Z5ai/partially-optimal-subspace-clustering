@@ -27,7 +27,6 @@ TEST_CASE("testing_all_costs_positive_U_size_2") {
     CHECK(constraints.getCuts().size() == 6);
 }
 
-
 TEST_CASE("testing_cut_two_components_of_size_1_for_graph_size_5") {
     std::vector<std::vector<std::vector<float>>> triple_costs{{          {{1,1,1},{1,1},{1}},  {{1,-1},{1}},    {{1}}             }};
     int n_vertices{5};
@@ -50,7 +49,6 @@ TEST_CASE("testing_cut_two_components_of_size_1_for_graph_size_5") {
     comp = constraints.getCuts() == constraints_expected_result.getCuts();
     CHECK(comp);
 }
-
 
 TEST_CASE("testing_cut_one_component_of_size_2_for_graph_size_5") {
     std::vector<std::vector<std::vector<float>>> triple_costs{{          {{-1,1,1},{1,1},{1}},  {{1,1},{1}},    {{1}}             }};

@@ -6,10 +6,13 @@
 #include "../Graph/Constraints.h"
 
 class PersistencyCriterion {
+
+
 protected:
     const Instance& instance;
     Constraints& constraints;
     int n_vertices{};
+
 
 public:
     PersistencyCriterion(Instance& instance, Constraints& constraints, int n_vertices)

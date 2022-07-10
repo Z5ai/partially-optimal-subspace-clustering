@@ -9,6 +9,7 @@
 // => constraints must be synchronized or updated somehow (for now: leave out this detail)
 class TriangleCriterion: public PersistencyCriterion {
 
+
 public:
     TriangleCriterion(Instance& instance, Constraints& constraints, int n_vertices)
     : PersistencyCriterion{instance, constraints, n_vertices}{
