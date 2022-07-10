@@ -7,10 +7,10 @@ enum Mode {EDGE, TRIANGLE};
 
 //settings
 const int n_planes{3};
-const int n_vertices_per_plane{2};
+const int n_vertices_per_plane{33};
 const float stddev{0.01};
 const float threshold_factor{3};
-const Mode mode{TRIANGLE};
+const Mode mode{EDGE};
 const std::string project_path{R"(/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering)"};
 
 

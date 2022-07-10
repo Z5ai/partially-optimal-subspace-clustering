@@ -5,7 +5,6 @@
 #include <iostream>
 #include "PersistencyCriterion.h"
 
-//TODO: 'cuts can be inserted two time' needs to be resolved
 class EdgeCriterionCut: public PersistencyCriterion {
 
 
