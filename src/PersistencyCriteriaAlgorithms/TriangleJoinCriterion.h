@@ -18,34 +18,21 @@ public:
     std::vector<float> create_costs_abs_singlet(){
         std::vector<float> singlets(n_vertices*(((n_vertices-1)*(n_vertices-2))/2));
         for(int u{0}; u<n_vertices; u++){
-            float singlet_cost;
-            for(int i{0}; i<n_vertices; i++){ if(i==u) continue;
-                for(int j{i+1}; j<n_vertices; j++){ if(j==u) continue;
-                    singlet_cost += std::abs(instance.get_cost(u, i, j));
-                }
-            }
+            float singlet_cost = sum_costs_one_fixed_vertex(u, [](float cost) -> float {return std::abs(cost); });
             singlets.push_back(singlet_cost);
         }
         return singlets;
     }
 
-    float get_costs_abs_to_two_vertices(int u, int v){
-        float sum{0};
-        for(int i{0}; i<n_vertices; i++){ if(i==u || i==v) continue;
-            sum += std::abs(instance.get_cost(u, v, i));
-        }
-        return sum;
+    float sum_costs_abs_two_fixed_vertices(int u, int v){
+        return sum_costs_two_fixed_vertices(u, v, [](float cost) -> float {return std::abs(cost); });
     }
 
-    float get_costs_pos_to_two_vertices(int u, int v){
-        float sum{0};
-        for(int i{0}; i<n_vertices; i++){ if(i==u || i==v) continue;
-            sum += std::max(0.0f, instance.get_cost(u, v, i));
-        }
-        return sum;
+    float sum_costs_pos_two_fixed_vertices(int u, int v){
+        return sum_costs_two_fixed_vertices(u, v, [](float cost) -> float {return std::max(0.0f, cost); });
     }
 
-    float get_costs_neg_with_only_one_vertex_in_triangle(int u, int v, int w){
+    float sum_costs_neg_with_only_one_vertex_in_triangle(int u, int v, int w){
         float sum{0};
         for(int i{0}; i<n_vertices; i++){ if(i==u || i==v || i==w) continue;
             for(int j{i+1}; j<n_vertices; j++){ if(j==u || j==v || j==w) continue;
@@ -60,14 +47,14 @@ public:
     bool evaluate_one_triangle(int u, int v, int w, std::vector<float> costs_singlet){
         //terms for right side of inequality
         float c_uvw = instance.get_cost(u, v, w);
-        float c_Tuw_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, w) - (std::max(0.0f, c_uvw));
-        float c_Tuv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(u, v) - (std::max(0.0f, c_uvw));
-        float c_Twv_pos_wo_Tuvw = get_costs_pos_to_two_vertices(w, v) - (std::max(0.0f, c_uvw));
-        float c_Tduvw_neg_wo_Tuw_Tuv_Tvw = get_costs_neg_with_only_one_vertex_in_triangle(u, v, w);
+        float c_Tuw_pos_wo_Tuvw = sum_costs_pos_two_fixed_vertices(u, w) - (std::max(0.0f, c_uvw));
+        float c_Tuv_pos_wo_Tuvw = sum_costs_pos_two_fixed_vertices(u, v) - (std::max(0.0f, c_uvw));
+        float c_Twv_pos_wo_Tuvw = sum_costs_pos_two_fixed_vertices(w, v) - (std::max(0.0f, c_uvw));
+        float c_Tduvw_neg_wo_Tuw_Tuv_Tvw = sum_costs_neg_with_only_one_vertex_in_triangle(u, v, w);
         //terms for left side of inequality
-        float c_Tuw_abs =  get_costs_abs_to_two_vertices(u,w);
-        float c_TdU_abs_wo_Tuv_wo_Tuw = costs_singlet.at(u) - get_costs_abs_to_two_vertices(u,v) - c_Tuw_abs;
-        float c_TdW_abs_wo_Twv_wo_Twu = costs_singlet.at(w) - get_costs_abs_to_two_vertices(w,v) - c_Tuw_abs;
+        float c_Tuw_abs = sum_costs_abs_two_fixed_vertices(u, w);
+        float c_TdU_abs_wo_Tuv_wo_Tuw = costs_singlet.at(u) - sum_costs_abs_two_fixed_vertices(u, v) - c_Tuw_abs;
+        float c_TdW_abs_wo_Twv_wo_Twu = costs_singlet.at(w) - sum_costs_abs_two_fixed_vertices(w, v) - c_Tuw_abs;
         // evaluate triangle criterion
         bool case1 {c_TdU_abs_wo_Tuv_wo_Tuw <= -c_Tuw_pos_wo_Tuvw -c_Tuv_pos_wo_Tuvw -c_uvw};
         bool case2 {c_TdW_abs_wo_Twv_wo_Twu <= -c_Tuw_pos_wo_Tuvw -c_Twv_pos_wo_Tuvw -c_uvw};
