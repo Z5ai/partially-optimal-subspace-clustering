@@ -3,9 +3,9 @@
 #include <core.h>
 #include "Constants.h"
 #include "Graph/Instance.h"
-#include "PersistencyCriteriaAlgorithms/EdgeCriterionCut.h"
+#include "PersistencyCriteriaAlgorithms/EdgeCutCriterion.h"
 #include "Graph/Constraints.h"
-#include "PersistencyCriteriaAlgorithms/TriangleCriterion.h"
+#include "PersistencyCriteriaAlgorithms/TriangleJoinCriterion.h"
 
 //TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
 //TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative instance at once, if this triple do not influence each other
@@ -27,17 +27,23 @@ int main() {
 
     // evaluate data by partial optimality criterion
     switch(mode){
-        case(EDGE):{
+        case(EDGE_CUT):{
             // TODO: stddev 0.001 threshold_factor 0.03 (the smaller boths values, the more cuts are found)
             //  450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
-            EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
-            edge_criterion_cut.evaluate_U_size_1();
+            EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
+            edge_cut_criterion.evaluate_U_size_1();
             break;
         }
-        case(TRIANGLE):{
+        case(TRIANGLE_CUT):{
             // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
-            TriangleCriterion triangleCriterion{instance, constraints, n_vertices};
-            triangleCriterion.evaluate_all_triangles_with_singlets();
+            TriangleCutCriterion triangle_cut_criterion{instance, constraints, n_vertices};
+            triangle_cut_criterion.evaluate_all_triangles_with_singlets();
+            break;
+        }
+        case(TRIANGLE_JOIN):{
+            // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
+            TriangleJoinCriterion triangle_join_criterion{instance, constraints, n_vertices};
+            triangle_join_criterion.evaluate_all_triangles_with_singlets();
             break;
         }
     }

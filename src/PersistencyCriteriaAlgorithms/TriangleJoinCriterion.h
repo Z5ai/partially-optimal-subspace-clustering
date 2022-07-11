@@ -1,5 +1,5 @@
-#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLECRITERION_H
-#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLECRITERION_H
+#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLEJOINCRITERION_H
+#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLEJOINCRITERION_H
 
 
 #include "PersistencyCriterion.h"
@@ -7,11 +7,11 @@
 //TODO: when triangle criterion is true several times
 // and a join mapping from one triangle interferes with a cut mapping from another mapping, than this must be investigated
 // => constraints must be synchronized or updated somehow (for now: leave out this detail)
-class TriangleCriterion: public PersistencyCriterion {
+class TriangleJoinCriterion: public PersistencyCriterion {
 
 
 public:
-    TriangleCriterion(Instance& instance, Constraints& constraints, int n_vertices)
+    TriangleJoinCriterion(Instance& instance, Constraints& constraints, int n_vertices)
     : PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
@@ -93,4 +93,4 @@ public:
 };
 
 
-#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLECRITERION_H
+#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_TRIANGLEJOINCRITERION_H

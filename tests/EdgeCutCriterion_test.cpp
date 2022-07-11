@@ -2,7 +2,7 @@
 #include "doctest.h"
 #include "../src/Graph/Instance.h"
 #include "../src/Graph/Constraints.h"
-#include "../src/PersistencyCriteriaAlgorithms/EdgeCriterionCut.h"
+#include "../src/PersistencyCriteriaAlgorithms/EdgeCutCriterion.h"
 
 
 TEST_CASE("testing_all_costs_positive_U_size_1") {
@@ -10,8 +10,8 @@ TEST_CASE("testing_all_costs_positive_U_size_1") {
     int n_vertices{4};
     Instance instance{n_vertices,triple_costs};
     Constraints constraints{};
-    EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
-    edge_criterion_cut.evaluate_U_size_1();
+    EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
+    edge_cut_criterion.evaluate_U_size_1();
 
     CHECK(constraints.getCuts().size() == 6);
 }
@@ -21,8 +21,8 @@ TEST_CASE("testing_all_costs_positive_U_size_2") {
     int n_vertices{4};
     Instance instance{n_vertices,triple_costs};
     Constraints constraints{};
-    EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
-    edge_criterion_cut.evaluate_U_size_2();
+    EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
+    edge_cut_criterion.evaluate_U_size_2();
 
     CHECK(constraints.getCuts().size() == 6);
 }
@@ -32,8 +32,8 @@ TEST_CASE("testing_cut_two_components_of_size_1_for_graph_size_5") {
     int n_vertices{5};
     Instance instance{n_vertices,triple_costs};
     Constraints constraints{};
-    EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
-    edge_criterion_cut.evaluate_U_size_1();
+    EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
+    edge_cut_criterion.evaluate_U_size_1();
 
     Constraints constraints_expected_result{};
     bool comp;
@@ -55,8 +55,8 @@ TEST_CASE("testing_cut_one_component_of_size_2_for_graph_size_5") {
     int n_vertices{5};
     Instance instance{n_vertices,triple_costs};
     Constraints constraints{};
-    EdgeCriterionCut edge_criterion_cut{instance, constraints, n_vertices};
-    edge_criterion_cut.evaluate_U_size_2();
+    EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
+    edge_cut_criterion.evaluate_U_size_2();
 
     Constraints constraints_expected_result{};
     bool comp;

@@ -1,15 +1,15 @@
-#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONCUT_H
-#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONCUT_H
+#ifndef PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECUTCRITERION_H
+#define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECUTCRITERION_H
 
 
 #include <iostream>
 #include "PersistencyCriterion.h"
 
-class EdgeCriterionCut: public PersistencyCriterion {
+class EdgeCutCriterion: public PersistencyCriterion {
 
 
 public:
-    EdgeCriterionCut(Instance& instance, Constraints& constraints, int n_vertices)
+    EdgeCutCriterion(Instance& instance, Constraints& constraints, int n_vertices)
         : PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
@@ -66,4 +66,4 @@ public:
     }
 };
 
-#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECRITERIONCUT_H
+#endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECUTCRITERION_H

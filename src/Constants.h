@@ -2,7 +2,7 @@
 #define PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_CONSTANTS_H
 
 
-enum Mode {EDGE, TRIANGLE};
+enum Mode {EDGE_CUT, TRIANGLE_CUT, TRIANGLE_JOIN};
 
 
 //settings
@@ -10,7 +10,7 @@ const int n_planes{3};
 const int n_vertices_per_plane{33};
 const float stddev{0.01};
 const float threshold_factor{3};
-const Mode mode{EDGE};
+const Mode mode{TRIANGLE_CUT};
 const std::string project_path{R"(/home/david/3_01__educ__TUD/INF-PM-FPA/partially-optimal-subspace-clustering)"};
 
 
