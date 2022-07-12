@@ -6,6 +6,7 @@
 #include "PersistencyCriteriaAlgorithms/EdgeCutCriterion.h"
 #include "Graph/Constraints.h"
 #include "PersistencyCriteriaAlgorithms/TriangleJoinCriterion.h"
+#include "PersistencyCriteriaAlgorithms/TriangleCutCriterion.h"
 
 //TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
 //TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative instance at once, if this triple do not influence each other
@@ -35,7 +36,6 @@ int main() {
             break;
         }
         case(TRIANGLE_CUT):{
-            // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
             TriangleCutCriterion triangle_cut_criterion{instance, constraints, n_vertices};
             triangle_cut_criterion.evaluate_all_triangles_with_singlets();
             break;

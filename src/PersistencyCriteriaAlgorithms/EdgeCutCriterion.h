@@ -10,7 +10,7 @@ class EdgeCutCriterion: public PersistencyCriterion {
 
 public:
     EdgeCutCriterion(Instance& instance, Constraints& constraints, int n_vertices)
-        : PersistencyCriterion{instance, constraints, n_vertices}{
+        :PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
     // returns true, if all costs to one vertex u are zero or positive

@@ -12,7 +12,7 @@ class TriangleJoinCriterion: public PersistencyCriterion {
 
 public:
     TriangleJoinCriterion(Instance& instance, Constraints& constraints, int n_vertices)
-    : PersistencyCriterion{instance, constraints, n_vertices}{
+        :PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
     std::vector<float> create_costs_abs_singlet(){

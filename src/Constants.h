@@ -7,7 +7,7 @@ enum Mode {EDGE_CUT, TRIANGLE_CUT, TRIANGLE_JOIN};
 
 //settings
 const int n_planes{3};
-const int n_vertices_per_plane{33};
+const int n_vertices_per_plane{2};
 const float stddev{0.01};
 const float threshold_factor{3};
 const Mode mode{TRIANGLE_CUT};
