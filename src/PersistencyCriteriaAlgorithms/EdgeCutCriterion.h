@@ -28,9 +28,7 @@ public:
             // for U = {u} query edge_cut_criterion
             if(check_costs_for_unique_sign_pos_one_fixed_vertex(u))
                 // write result into constraints: cut U = {u}
-                for(int r{0}; r<n_vertices; r++){ if(r==u) continue;
-                    constraints.insert_cut(u, r);
-                }
+                constraints.cut_one_vertex(u);
     }
 
     // can be optimized by using return from 'evaluate_U_size_1()' as parameterinput. replace time by memory.

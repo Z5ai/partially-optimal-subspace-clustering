@@ -26,20 +26,17 @@ public:
         //cut around u
         float c_TdU_neg_wo_Tuvw = costs_singlet[u] - std::min(0.0f, c_uvw);
         if(-c_TdU_neg_wo_Tuvw <= c_uvw){
-            constraints.insert_cut(u,v);
-            constraints.insert_cut(u,w);
+            constraints.cut_one_vertex(u);
         }
         //cut around v
         float c_TdV_neg_wo_Tuvw = costs_singlet[v]- std::min(0.0f, c_uvw);
         if(-c_TdV_neg_wo_Tuvw <= c_uvw){
-            constraints.insert_cut(v,u);
-            constraints.insert_cut(v,w);
+            constraints.cut_one_vertex(v);
         }
         //cut around w
         float c_TdW_neg_wo_Tuvw = costs_singlet[w]- std::min(0.0f, c_uvw);
         if(-c_TdW_neg_wo_Tuvw <= c_uvw){
-            constraints.insert_cut(w,u);
-            constraints.insert_cut(w,v);
+            constraints.cut_one_vertex(w);
         }
     }
 

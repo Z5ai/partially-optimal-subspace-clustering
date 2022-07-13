@@ -10,10 +10,13 @@
 class Constraints {
     std::set<std::set<int>> cuts;
     std::set<std::set<int>> joins;
+    int n_vertices;
 
 
 public:
-    Constraints() {}
+    Constraints(int n_vertices)
+        :n_vertices{n_vertices}{
+    }
 
     void insert_cut(int a, int b){
         cuts.insert({a,b});
@@ -21,6 +24,21 @@ public:
 
     void insert_join(int a, int b){
         joins.insert({a,b});
+    }
+
+    void cut_one_vertex(int u){
+        for(int r{0}; r<n_vertices; r++){ if(r==u) continue;
+            insert_cut(u, r);
+        }
+    }
+
+    void cut_two_vertices(int u, int v){
+        for(int r{0}; r<n_vertices; r++){ if(r==u || r==v) continue;
+            insert_cut(u, r);
+        }
+        for(int r{0}; r<n_vertices; r++){ if(r==u || r==v) continue;
+            insert_cut(v, r);
+        }
     }
 
     std::set<std::set<int>> getCuts() {
