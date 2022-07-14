@@ -9,6 +9,7 @@
 #include "istreamwrapper.h"
 #include "document.h"
 #include "Constraints.h"
+#include "../Constants.h"
 
 class Instance {
     std::vector<std::vector<std::vector<float>>> triple_costs;
