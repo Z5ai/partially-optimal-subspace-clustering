@@ -50,41 +50,28 @@ public:
         return joins;
     }
 
-    void write_to_json(){
-
-        //create document
-        rapidjson::Document doc;
-        rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
-        rapidjson::Value o(rapidjson::kObjectType);
-
-        rapidjson::Value cuts_json(rapidjson::kArrayType);
+    void print_constraints(){
+        std::cout<<"\nCuts:\n";
+        int c{0};
         for(std::set<int> cut: cuts){
-            rapidjson::Value cut_json(rapidjson::kArrayType);
-            for(int vertex: cut)
-                cut_json.PushBack(vertex, allocator);
-            cuts_json.PushBack(cut_json, allocator);
+            std::cout << "cut " << c << ": ";
+            for(int vertex: cut){
+                std::cout << vertex << " ";
+            }
+            std::cout << "\n";
+            c++;
         }
-        o.AddMember("different_partition", cuts_json, allocator);
-
-        rapidjson::Value joins_json(rapidjson::kArrayType);
+        std::cout << "\n";
+        std::cout<<"\nJoins:\n";
+        int j{0};
         for(std::set<int> join: joins){
-            rapidjson::Value join_json(rapidjson::kArrayType);
-            for(int vertex: join)
-                join_json.PushBack(vertex, allocator);
-            joins_json.PushBack(join_json, allocator);
+            std::cout << "join " << j << ": ";
+            for(int vertex: join){
+                std::cout << vertex << " ";
+            }
+            std::cout << "\n";
+            j++;
         }
-        o.AddMember("same_partition", joins_json, allocator);
-
-
-        //write document to outputstream
-        std::ofstream ofs{constraints_path};
-        if (!ofs.is_open()) {
-            std::cerr << "Could not open file for writing!\n";
-            throw std::exception();
-        }
-        rapidjson::OStreamWrapper osw{ofs};
-        rapidjson::Writer<rapidjson::OStreamWrapper> writer(osw);
-        doc.Accept(writer);
     }
 };
 

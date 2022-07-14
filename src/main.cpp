@@ -8,15 +8,11 @@
 #include "PersistencyCriteriaAlgorithms/TriangleJoinCriterion.h"
 #include "PersistencyCriteriaAlgorithms/TriangleCutCriterion.h"
 
-//TODO tests: only nodelabels. costs positive or negative.    number of cuts must be okay
-//TODO implementation: edge_cut criterion growing: calculate costtriples to one vertex. then try to grow to a vertex, where cost is negative. probably can grow for one vertex all negative instance at once, if this triple do not influence each other
 //TODO presentation:
 // 1. Proof: define notation, explain mappings p(x), join_mapping and cut_mapping are valide: map from multicut to multicut(reference to paper): but also combinations of mappings are valid
 // 2. Implementation:
 // 3. Result of Implementation: result in table. discuss bad results!: reason are also synthesized instances (planes) and their costs. to one vertex there will be two other vertices from synthesized plane, where cost is negative, but we need all costs to be positive to cut outlier. But algorithm tests work.
 
-// TODO until monday: 1) implement triangle criterion and maybe tests
-//  after that: 2) discuss results + presentation
 
 int main() {
 
@@ -29,10 +25,9 @@ int main() {
     // evaluate data by partial optimality criterion
     switch(mode){
         case(EDGE_CUT):{
-            // TODO: stddev 0.001 threshold_factor 0.03 (the smaller both values, the more cuts are found)
-            //  450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
             EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
             edge_cut_criterion.evaluate_U_size_1();
+            edge_cut_criterion.evaluate_U_size_2();
             break;
         }
         case(TRIANGLE_CUT):{
@@ -41,14 +36,13 @@ int main() {
             break;
         }
         case(TRIANGLE_JOIN):{
-            // TODO: O(n^4) for 99 vertices: 5 minutes, no constraints found
             TriangleJoinCriterion triangle_join_criterion{instance, constraints, n_vertices};
             triangle_join_criterion.evaluate_all_triangles_with_singlets();
             break;
         }
     }
 
-    // write data
-    // constraints.write_to_json();
+    //print result
+    constraints.print_constraints();
     return 0;
 }

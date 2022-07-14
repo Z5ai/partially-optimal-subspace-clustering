@@ -48,6 +48,7 @@ public:
         return sum;
     }
 
+    //checks join-persistency for the edge uw
     bool evaluate_one_triangle(int u, int v, int w, std::vector<float> costs_singlet){
         //terms for right side of inequality
         float c_uvw = instance.get_cost(u, v, w);
@@ -57,8 +58,10 @@ public:
         float c_Tduvw_neg_wo_Tuw_Tuv_Tvw = sum_costs_neg_with_only_one_vertex_in_triangle(u, v, w);
         //terms for left side of inequality
         float c_Tuw_abs = sum_costs_abs_two_fixed_vertices(u, w);
-        float c_TdU_abs_wo_Tuv_wo_Tuw = costs_singlet.at(u) - sum_costs_abs_two_fixed_vertices(u, v) - c_Tuw_abs;
-        float c_TdW_abs_wo_Twv_wo_Twu = costs_singlet.at(w) - sum_costs_abs_two_fixed_vertices(w, v) - c_Tuw_abs;
+        float c_Tuv_abs = sum_costs_abs_two_fixed_vertices(u, v);
+        float c_Twv_abs = sum_costs_abs_two_fixed_vertices(w, v);
+        float c_TdU_abs_wo_Tuv_wo_Tuw = costs_singlet.at(u) - c_Tuv_abs - c_Tuw_abs;
+        float c_TdW_abs_wo_Twv_wo_Twu = costs_singlet.at(w) - c_Twv_abs - c_Tuw_abs;
         //evaluate triangle criterion
         bool case1 {c_TdU_abs_wo_Tuv_wo_Tuw <= -c_Tuw_pos_wo_Tuvw -c_Tuv_pos_wo_Tuvw -c_uvw};
         bool case2 {c_TdW_abs_wo_Twv_wo_Twu <= -c_Tuw_pos_wo_Tuvw -c_Twv_pos_wo_Tuvw -c_uvw};
