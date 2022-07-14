@@ -12,43 +12,26 @@ public:
         :PersistencyCriterion{instance, constraints, n_vertices} {
     }
 
-    std::vector<float> create_costs_neg_singlet(){
-        std::vector<float> singlets(n_vertices*(((n_vertices-1)*(n_vertices-2))/2));
-        for(int u{0}; u<n_vertices; u++){
-            float singlet_cost = sum_costs_one_fixed_vertex(u, [](float cost) -> float {return std::min(0.0f, cost);});
-            singlets.push_back(singlet_cost);
-        }
-        return singlets;
+    float sum_costs_neg_one_fixed_vertex(int u){
+        return sum_costs_one_fixed_vertex(u, [](float cost) -> float {return std::min(0.0f, cost); });
     }
 
-    void evaluate_one_triangle(int u, int v, int w, std::vector<float> costs_singlet){
-        float c_uvw = instance.get_cost(u, v, w);
-        //cut around u
-        float c_TdU_neg_wo_Tuvw = costs_singlet[u] - std::min(0.0f, c_uvw);
-        if(-c_TdU_neg_wo_Tuvw <= c_uvw){
-            constraints.cut_one_vertex(u);
-        }
-        //cut around v
-        float c_TdV_neg_wo_Tuvw = costs_singlet[v]- std::min(0.0f, c_uvw);
-        if(-c_TdV_neg_wo_Tuvw <= c_uvw){
-            constraints.cut_one_vertex(v);
-        }
-        //cut around w
-        float c_TdW_neg_wo_Tuvw = costs_singlet[w]- std::min(0.0f, c_uvw);
-        if(-c_TdW_neg_wo_Tuvw <= c_uvw){
-            constraints.cut_one_vertex(w);
-        }
-    }
-
-
-    void evaluate_all_triangles_with_singlets(){
-        std::vector<float> costs_singlet = create_costs_neg_singlet();
-        for(int x{0}; x<n_vertices; x++){
-            for(int y{x+1}; y<n_vertices; y++){
-                for(int z{y+1}; z<n_vertices; z++){
-                    evaluate_one_triangle(x,y,z,costs_singlet);
+    void evaluate_all_triple_for_one_singlet(float c_TdU_neg, int u){
+        for(int i{0}; i<n_vertices; i++){ if(i==u) continue;
+            for(int j{i+1}; j<n_vertices; j++){ if(j==u) continue;
+                float c_uvw = instance.get_cost(u,i,j);
+                float c_TdU_neg_wo_Tuvw = c_TdU_neg - std::min(0.0f, c_uvw);
+                if(-c_TdU_neg_wo_Tuvw <= c_uvw){
+                    constraints.cut_one_vertex(u);
                 }
             }
+        }
+    }
+
+    void evaluate_all_singlets(){
+        for(int u{0}; u<n_vertices;u++){
+            float c_TdU_neg = sum_costs_neg_one_fixed_vertex(u);
+            evaluate_all_triple_for_one_singlet(c_TdU_neg, u);
         }
     }
 };

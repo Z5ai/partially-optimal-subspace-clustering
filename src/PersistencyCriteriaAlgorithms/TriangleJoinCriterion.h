@@ -15,13 +15,8 @@ public:
         :PersistencyCriterion{instance, constraints, n_vertices}{
     }
 
-    std::vector<float> create_costs_abs_singlet(){
-        std::vector<float> singlets(n_vertices*(((n_vertices-1)*(n_vertices-2))/2));
-        for(int u{0}; u<n_vertices; u++){
-            float singlet_cost = sum_costs_one_fixed_vertex(u, [](float cost) -> float {return std::abs(cost); });
-            singlets.push_back(singlet_cost);
-        }
-        return singlets;
+    float sum_costs_abs_one_fixed_vertex(int u){
+        return sum_costs_one_fixed_vertex(u, [](float cost) -> float {return std::abs(cost); });
     }
 
     float sum_costs_abs_two_fixed_vertices(int u, int v){
@@ -30,6 +25,15 @@ public:
 
     float sum_costs_pos_two_fixed_vertices(int u, int v){
         return sum_costs_two_fixed_vertices(u, v, [](float cost) -> float {return std::max(0.0f, cost); });
+    }
+
+    std::vector<float> create_costs_abs_singlet(){
+        std::vector<float> singlets(n_vertices*(((n_vertices-1)*(n_vertices-2))/2));
+        for(int u{0}; u<n_vertices; u++){
+            float singlet_cost = sum_costs_abs_one_fixed_vertex(u);
+            singlets.push_back(singlet_cost);
+        }
+        return singlets;
     }
 
     float sum_costs_neg_with_only_one_vertex_in_triangle(int u, int v, int w){

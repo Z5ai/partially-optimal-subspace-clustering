@@ -1,7 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "../src/Graph/Instance.h"
-#include "../src/Graph/Constraints.h"
 #include "../src/PersistencyCriteriaAlgorithms/EdgeCutCriterion.h"
 
 

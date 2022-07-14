@@ -24,12 +24,12 @@ int main() {
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveTestDataToFile$ -numberOfPlanes {} -pointsPerPlane {} -mean 0 -stddev {} -outputFile {}", go_project_path, go_script_path, n_planes, n_vertices_per_plane, stddev, synthesized_instance_path).c_str());
     std::system(fmt::format("cd {} && go test {} -run=^TestSaveCostToFile$ -inputFile {} -outputFile {} -threshold {} -amplification 3", go_project_path, go_script_path, synthesized_instance_path, triple_costs_path, threshold).c_str());
     Instance instance{n_vertices};
-    Constraints constraints{};
+    Constraints constraints{n_vertices};
 
     // evaluate data by partial optimality criterion
     switch(mode){
         case(EDGE_CUT):{
-            // TODO: stddev 0.001 threshold_factor 0.03 (the smaller boths values, the more cuts are found)
+            // TODO: stddev 0.001 threshold_factor 0.03 (the smaller both values, the more cuts are found)
             //  450 vertices: no cuts found       99 vertices: 98 cuts found => 1 outlier
             EdgeCutCriterion edge_cut_criterion{instance, constraints, n_vertices};
             edge_cut_criterion.evaluate_U_size_1();
@@ -37,7 +37,7 @@ int main() {
         }
         case(TRIANGLE_CUT):{
             TriangleCutCriterion triangle_cut_criterion{instance, constraints, n_vertices};
-            triangle_cut_criterion.evaluate_all_triangles_with_singlets();
+            triangle_cut_criterion.evaluate_all_singlets();
             break;
         }
         case(TRIANGLE_JOIN):{
