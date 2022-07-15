@@ -22,8 +22,9 @@ $ cmake ..
 $ make
 ```
 ### Run Program
+inside build directory:
 ```sh
-$ ./partial-optimal-subspace-clustering {n_planes} {n_vertices_per_plane} {stddev} {mode} {project_path}
+$ ./partially_optimal_subspace_clustering {n_planes} {n_vertices_per_plane} {stddev} {mode} {project_path}
 ```
 The following arguments must be set:
 - `n_planes`: Number of planes. Recommended value: **3**
