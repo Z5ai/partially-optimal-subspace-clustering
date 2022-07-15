@@ -13,7 +13,7 @@ add_library(fmt::fmt-header-only INTERFACE IMPORTED)
 
 
 #main code
-add_executable(partially_optimal_subspace_clustering src/main.cpp src/Graph/Instance.h src/Constants.h src/PersistencyCriteriaAlgorithms/PersistencyCriterion.h src/PersistencyCriteriaAlgorithms/EdgeCutCriterion.h src/PersistencyCriteriaAlgorithms/TriangleJoinCriterion.h src/Graph/Constraints.h src/PersistencyCriteriaAlgorithms/TriangleCutCriterion.h)
+add_executable(partially_optimal_subspace_clustering src/main.cpp src/Graph/Instance.h src/PersistencyCriteriaAlgorithms/PersistencyCriterion.h src/PersistencyCriteriaAlgorithms/EdgeCutCriterion.h src/PersistencyCriteriaAlgorithms/TriangleJoinCriterion.h src/Graph/Constraints.h src/PersistencyCriteriaAlgorithms/TriangleCutCriterion.h)
 target_link_libraries(partially_optimal_subspace_clustering PRIVATE rapidjson PRIVATE fmt::fmt-header-only)
 
 #tests

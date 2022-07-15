@@ -9,7 +9,6 @@
 #include "istreamwrapper.h"
 #include "document.h"
 #include "Constraints.h"
-#include "../Constants.h"
 
 class Instance {
     std::vector<std::vector<std::vector<float>>> triple_costs;
@@ -17,7 +16,7 @@ class Instance {
 
 
 public:
-    Instance(int n_vertices): n_vertices{n_vertices} {
+    Instance(int n_vertices, const std::string& triple_costs_path): n_vertices{n_vertices} {
         std::ifstream ifs{triple_costs_path};
         if (!ifs.is_open()) {
             std::cerr << "Could not open file for reading!\n";

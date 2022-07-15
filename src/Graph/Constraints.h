@@ -4,7 +4,6 @@
 
 #include <rapidjson.h>
 #include <set>
-#include "../Constants.h"
 #include "ostreamwrapper.h"
 #include "writer.h"
 
