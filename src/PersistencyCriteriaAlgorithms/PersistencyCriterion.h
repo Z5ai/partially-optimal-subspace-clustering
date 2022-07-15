@@ -5,6 +5,7 @@
 #include "../Graph/Instance.h"
 #include "../Graph/Constraints.h"
 
+
 class PersistencyCriterion {
 
 
@@ -59,5 +60,6 @@ public:
         return unique_sign;
     }
 };
+
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_PERSISTENCYCRITERION_H

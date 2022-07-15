@@ -4,9 +4,7 @@
 
 #include "PersistencyCriterion.h"
 
-//TODO: when triangle criterion is true several times
-// and a join mapping from one triangle interferes with a cut mapping from another mapping, than this must be investigated
-// => constraints must be synchronized or updated somehow (for now: leave out this detail)
+
 class TriangleJoinCriterion: public PersistencyCriterion {
 
 

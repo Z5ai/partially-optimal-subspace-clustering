@@ -4,6 +4,7 @@
 
 #include "PersistencyCriterion.h"
 
+
 class TriangleCutCriterion: public PersistencyCriterion {
 
 

@@ -7,6 +7,7 @@
 #include "ostreamwrapper.h"
 #include "writer.h"
 
+
 class Constraints {
     std::set<std::set<int>> cuts;
     std::set<std::set<int>> joins;

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "PersistencyCriterion.h"
 
+
 class EdgeCutCriterion: public PersistencyCriterion {
 
 
@@ -49,5 +50,6 @@ public:
                 }
     }
 };
+
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_EDGECUTCRITERION_H

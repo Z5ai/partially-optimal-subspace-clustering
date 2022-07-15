@@ -10,6 +10,7 @@
 #include "document.h"
 #include "Constraints.h"
 
+
 class Instance {
     std::vector<std::vector<std::vector<float>>> triple_costs;
     int n_vertices{};
@@ -62,5 +63,6 @@ public:
         return triple_costs.at(i).at(j - i - 1).at(k - j - 1);
     }
 };
+
 
 #endif //PARTIALLY_OPTIMAL_SUBSPACE_CLUSTERING_INSTANCE_H
